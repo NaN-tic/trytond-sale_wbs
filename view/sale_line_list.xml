@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!-- The COPYRIGHT file at the top level of this repository contains the full
+     copyright notices and license terms. -->
+<data>
+    <xpath expr="/tree/field[@name='type']" position="after">
+        <field name="chapter_number"/>
+    </xpath>
+    <xpath expr="/tree" position="inside">
+        <field name="childs" tree_invisible="1"/>
+        <field name="parent" tree_invisible="1"/>
+    </xpath>
+    <xpath expr="/tree" position="replace_attributes">
+        <tree tree_state="1"/>
+    </xpath>
+</data>

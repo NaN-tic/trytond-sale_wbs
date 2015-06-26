@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The COPYRIGHT file at the top level of this repository contains the full
+     copyright notices and license terms. -->
+<tryton>
+    <data>
+        <record model="ir.ui.view" id="work_breakdown_structure_view_form">
+            <field name="model">work.breakdown.structure</field>
+            <field name="type">form</field>
+            <field name="name">work_breakdown_structure_form</field>
+        </record>
+
+        <record model="ir.ui.view" id="work_breakdown_structure_view_list">
+            <field name="model">work.breakdown.structure</field>
+            <field name="type">tree</field>
+            <field name="field_childs">childs</field>
+            <field name="name">work_breakdown_structure_list</field>
+        </record>
+
+        <record model="ir.action.act_window" id="act_work_breakdown_structure">
+            <field name="name">Work Breakdown Structure</field>
+            <field name="res_model">work.breakdown.structure</field>
+            <field name="domain">[('parent', '=', None)]</field>
+        </record>
+        <record model="ir.action.act_window.view" id="act_work_breakdown_structure_view1">
+            <field name="sequence" eval="10"/>
+            <field name="view" ref="work_breakdown_structure_view_list"/>
+            <field name="act_window" ref="act_work_breakdown_structure"/>
+        </record>
+        <record model="ir.action.act_window.view" id="act_work_breakdown_structure_view2">
+            <field name="sequence" eval="20"/>
+            <field name="view" ref="work_breakdown_structure_view_form"/>
+            <field name="act_window" ref="act_work_breakdown_structure"/>
+        </record>
+
+        <record model="ir.model.access" id="access_work_breakdown_structure">
+            <field name="model" search="[('model', '=', 'work.breakdown.structure')]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_delete" eval="False"/>
+        </record>
+        <record model="ir.model.access" id="access_work_breakdown_structure_sale">
+            <field name="model" search="[('model', '=', 'work.breakdown.structure')]"/>
+            <field name="group" ref="sale.group_sale"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_delete" eval="False"/>
+        </record>
+    </data>
+</tryton>
