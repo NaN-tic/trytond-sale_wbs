@@ -157,7 +157,11 @@ class SaleLine(ChapterMixin):
     __name__ = 'sale.line'
 
     parent = fields.Many2One('sale.line', 'Parent', select=True,
-        left="left", right="right", ondelete='CASCADE')
+        left="left", right="right", ondelete='CASCADE', domain=[
+            ('sale', '=', Eval('sale')),
+            # compatibility with sale_subchapters
+            ('type', 'in', ['title', 'subtitle']),
+            ], depends=['sale'])
     left = fields.Integer('Left', required=True, select=True)
     right = fields.Integer('Right', required=True, select=True)
     childs = fields.One2Many('sale.line', 'parent', 'Childs', domain=[
