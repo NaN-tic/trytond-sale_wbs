@@ -31,6 +31,7 @@ class Sale:
         if cls.lines.domain:
             cls.lines_tree._field.domain.extend(cls.lines.domain)
         cls.lines_tree._field.states = cls.lines.states
+        cls.lines_tree._field.context = cls.lines.context
         cls.lines_tree._field.depends = cls.lines.depends
         # Quote button should be updated as it depends on lines
         cls._buttons['quote']['readonly'] = ~Eval('lines_tree', [])
