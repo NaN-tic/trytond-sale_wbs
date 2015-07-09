@@ -182,9 +182,13 @@ class SaleLine(ChapterMixin):
         super(SaleLine, cls).__setup__()
         if hasattr(cls, '_allow_modify_after_draft'):
             cls._allow_modify_after_draft.add('wbs')
-        for field_name in ['product', 'quantity', 'unit', 'unit_price']:
+        # Remove readonly state defined on sale
+        editable_fields = ['product', 'quantity', 'unit']
+        if not hasattr(cls, 'gross_unit_price'):
+            # compatibility with sale_discount
+            editable_fields.append('unit_price')
+        for field_name in editable_fields:
             field = getattr(cls, field_name)
-            # Remove readonly state defined on sale
             field.states.update({'readonly': False})
 
     @staticmethod
