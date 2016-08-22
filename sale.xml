@@ -42,7 +42,7 @@
     </data>
     <data depends="sale_process_lines">
         <record model="ir.action.act_window" id="sale_process_lines.act_sale_sale_lines_form">
-            <field name="domain">[('parent', '=', None), ('sale', 'in', Eval('active_ids'))]</field>
+            <field name="domain">[('parent', '=', None), ('sale', '=', Eval('active_id'))]</field>
         </record>
     </data>
 </tryton>
