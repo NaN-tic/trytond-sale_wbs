@@ -124,13 +124,16 @@ class Sale:
 
     def create_wbs_from_lines(self, lines_tree, wbs_tree):
         wbs_by_description = {
-            (x.description, x.product.id): x for x in wbs_tree
+            (x.description, x.product.id if x.product else None):
+                x for x in wbs_tree
             }
         for line in lines_tree:
+            if not line.product:
+                continue
             wbs_parent = line.parent.wbs if line.parent else None
             if not line.wbs:
                 wbs = wbs_by_description.get(
-                    (line.description, line.product.id)
+                    (line.description, line.product.id if line.product else None)
                     )
                 if not wbs:
                     wbs = line.get_work_breakdown_structure(wbs_parent)
