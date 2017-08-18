@@ -19,7 +19,7 @@
         <record model="ir.action.act_window" id="act_work_breakdown_structure">
             <field name="name">Work Breakdown Structure</field>
             <field name="res_model">work.breakdown.structure</field>
-            <field name="domain">[('parent', '=', None)]</field>
+            <field name="domain" eval="[('parent', '=', None)]" pyson="1"/>
         </record>
         <record model="ir.action.act_window.view" id="act_work_breakdown_structure_view1">
             <field name="sequence" eval="10"/>

@@ -206,9 +206,9 @@ class SaleLine(ChapterMixin):
     def default_right():
         return 0
 
-    def get_invoice_line(self, invoice_type):
+    def get_invoice_line(self):
         'Ensure that all lines have the sequence filled'
-        lines = super(SaleLine, self).get_invoice_line(invoice_type)
+        lines = super(SaleLine, self).get_invoice_line()
         for line in lines:
             line.sequence = self.sequence
         return lines

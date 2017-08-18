@@ -144,7 +144,7 @@ class WorkBreakdownStructure(ModelSQL, ModelView, ChapterMixin):
     def get_quantity(cls, wbs, name):
         pool = Pool()
         line = pool.get('sale.line').__table__()
-        cursor = Transaction().cursor
+        cursor = Transaction().connection.cursor()
 
         wbs_ids = [w.id for w in wbs]
         result = {}.fromkeys(wbs_ids, 0.0)
