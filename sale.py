@@ -46,9 +46,9 @@ class Sale:
                 })
 
     @fields.depends('lines_tree', methods=['lines'])
-    def on_change_lines_tree(self, name=None):
+    def on_change_lines_tree(self):
         self.lines = self.lines_tree
-        return self.on_change_lines()
+        self.on_change_lines()
 
     def get_wbs_tree(self, name):
         pool = Pool()
@@ -197,6 +197,9 @@ class SaleLine(ChapterMixin):
         for field_name in editable_fields:
             field = getattr(cls, field_name)
             field.states.update({'readonly': False})
+
+        if hasattr(cls, 'state'):
+            cls._allow_modify_after_draft |= set(['wbs'])
 
     @staticmethod
     def default_left():
