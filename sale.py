@@ -47,8 +47,22 @@ class Sale:
 
     @fields.depends('lines_tree', methods=['lines'])
     def on_change_lines_tree(self):
-        self.lines = self.lines_tree
-        self.on_change_lines()
+        self.untaxed_amount = Decimal('0.0')
+        self.tax_amount = Decimal('0.0')
+        self.total_amount = Decimal('0.0')
+
+        taxes = {}
+        if self.lines_tree:
+            for line in self.lines_tree:
+                self.untaxed_amount += getattr(line, 'amount', None) or 0
+            taxes = self._get_taxes()
+            self.tax_amount = sum(v['amount'] for v in taxes.itervalues())
+        if self.currency:
+            self.untaxed_amount = self.currency.round(self.untaxed_amount)
+            self.tax_amount = self.currency.round(self.tax_amount)
+        self.total_amount = self.untaxed_amount + self.tax_amount
+        if self.currency:
+            self.total_amount = self.currency.round(self.total_amount)
 
     def get_wbs_tree(self, name):
         pool = Pool()
