@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!-- The COPYRIGHT file at the top level of this repository contains the full
      copyright notices and license terms. -->
-<tree string="Work Breakdown Structure" sequence="sequence" tree_state="1">
+<tree sequence="sequence" tree_state="1">
     <field name="chapter_number"/>
     <field name="type"/>
     <field name="product"/>
